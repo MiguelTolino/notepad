@@ -7,7 +7,7 @@ import controller.MenuController;
 
 public class Menu extends JMenuBar {
 
-	private JMenu file, help, edit , font, style, size;
+	private JMenu file, help, edit , font, style, size, format;
 	private JMenuItem save, open, nw, about, tnr, arial, courier, bold, italic, under;
 	private JTextField text_size;
 	private MenuController mu;
@@ -21,6 +21,7 @@ public class Menu extends JMenuBar {
 		file = new JMenu("File");
 		help = new JMenu("Help");
 		edit = new JMenu("Edit");
+		format = new JMenu("Format");
 		save = new JMenuItem("Save");
 		open = new JMenuItem("Open");
 		nw = new JMenuItem("New");
@@ -33,12 +34,13 @@ public class Menu extends JMenuBar {
 		file.add(open);
 		file.add(save);
 		help.add(about);
-		edit.add(font);
-		edit.add(style);
-		edit.add(size);
+		format.add(font);
+		format.add(style);
+		format.add(size);
 		
 		add(file);
 		add(edit);
+		add(format);
 		add(help);
 		
 		font.add(arial = new JMenuItem("Arial"));
@@ -51,6 +53,8 @@ public class Menu extends JMenuBar {
 		
 		size.add(text_size = new JTextField(2));
 		
+		addItem("SERIF", font);
+		
 		save.addActionListener(mu);
 		open.addActionListener(mu);
 		nw.addActionListener(mu);
@@ -62,6 +66,12 @@ public class Menu extends JMenuBar {
 		under.addActionListener(mu);
 		text_size.addActionListener(mu);
 		
+		
+	}
+	
+	public void addItem(String type, JMenu menu) {
+		JMenuItem item = new JMenuItem(type);
+		menu.add(item);
 	}
 }
 
