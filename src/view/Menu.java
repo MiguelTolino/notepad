@@ -53,9 +53,10 @@ public class Menu extends JMenuBar {
 		
 		size.add(text_size = new JTextField(2));
 		
-		addItem("SERIF", font);
+		JMenuItem verdana = addItem("Verdana", font);
 		
 		save.addActionListener(mu);
+		about.addActionListener(mu);
 		open.addActionListener(mu);
 		nw.addActionListener(mu);
 		arial.addActionListener(mu);
@@ -65,13 +66,15 @@ public class Menu extends JMenuBar {
 		italic.addActionListener(mu);
 		under.addActionListener(mu);
 		text_size.addActionListener(mu);
+		verdana.addActionListener(mu);
 		
 		
 	}
 	
-	public void addItem(String type, JMenu menu) {
+	public JMenuItem addItem(String type, JMenu menu) {
 		JMenuItem item = new JMenuItem(type);
 		menu.add(item);
+		return (item);
 	}
 }
 

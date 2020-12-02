@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import model.Model;
 import view.Window;
@@ -25,7 +26,7 @@ public class MenuController implements ActionListener {
 		JMenuItem event = (JMenuItem)(ae.getSource());
 		if (event.getText().equals("Save")) {
 			try {
-				m.saveFile();
+				m.saveFile(win);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -34,7 +35,8 @@ public class MenuController implements ActionListener {
 		}
 		if (event.getText().equals("Open")) {
 			try {
-				m.openFile();
+				String text = m.openFile(win);
+				win.getTextPane().setText(text);
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -47,39 +49,33 @@ public class MenuController implements ActionListener {
 		{
 			String name = JOptionPane.showInputDialog("Insert name of new file");
 			m.newFile(name);
-			try {
-				m.openFile();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			System.out.println("New");
 		}
 		setFormat(event, size);
 		
-
-		
 	}
 	
 	private void setFormat(JMenuItem event, int size) {
-		
-		if (event.getText().equals("Arial")) {
-			win.getTextPane().setFont(new Font(event.getText(), Font.PLAIN, 12));
-		}
-		if (event.getText().equals("Times New Roman")) {
-			win.getTextPane().setFont(new Font(event.getText(), Font.PLAIN, 12));
-		}
-		if (event.getText().equals("Courier")) {
-			win.getTextPane().setFont(new Font(event.getText(), Font.PLAIN, 12));
+		ArrayList<String> list = new ArrayList<String>();
+		list.add("Arial");
+		list.add("Times New Roman");
+		list.add("Verdana");
+		list.add("Courier");
+		list.add("Bold");
+		list.add("Italic");
+		list.add("Underline");
+
+		if (list.contains(event.getText())) {
+			win.getTextPane().setFont(new Font(event.getText(), win.getTextPane().getFont().getStyle(), win.getTextPane().getFont().getSize()));
 		}
 		if (event.getText().equals("Bold")) {
-			win.getTextPane().setFont(new Font(event.getText(), Font.BOLD, 12));
+			win.getTextPane().setFont(new Font(event.getText(), Font.BOLD, win.getTextPane().getFont().getSize()));
 		}
 		if (event.getText().equals("Italic")) {
-			win.getTextPane().setFont(new Font(event.getText(), Font.ITALIC, 12));
+			win.getTextPane().setFont(new Font(event.getText(), Font.ITALIC, win.getTextPane().getFont().getSize()));
 		}
 		if (event.getText().equals("Underline")) {
-			win.getTextPane().setFont(new Font(event.getText(), Font.ROMAN_BASELINE, 12));
+			win.getTextPane().setFont(new Font(event.getText(), Font.ROMAN_BASELINE, win.getTextPane().getFont().getSize()));
 		}
 	}
 	

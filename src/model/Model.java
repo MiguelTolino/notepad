@@ -6,36 +6,34 @@ import java.io.IOException;
 import java.util.*;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
-import view.Gui;
+import view.Window;
 
 public class Model {
 	
-	public void openFile() throws FileNotFoundException {
-		int selection = fileChooser.showOpenDialog(this.getContentPane());
+	private File fichero;
+	
+	public String openFile(Window win) throws FileNotFoundException {
+		JFileChooser fc = new JFileChooser();
+		int selection = fc.showOpenDialog(win.getContentPane());
 		String text = "";
 		
 		if (selection == JFileChooser.APPROVE_OPTION)
 		{
-		   fichero = fileChooser.getSelectedFile();
+		   fichero = fc.getSelectedFile();
 		   // Aquí debemos abrir y leer el fichero.
 		   Scanner sc = new Scanner(fichero);
 		   while (sc.hasNextLine())
 			   text += (sc.nextLine() + "\n");
-		   ta.setText(text);
 		   sc.close();
 		}
-		
+		return (text);	
 	}
 	
 	public void newFile(String name) {
 	    try {
 	    	fichero = new File("C:\\Users\\migue\\eclipse-workspace\\notepad\\src\\" + name);
-	    	if ((fichero.getName().substring(fichero.getName().length() - 4).equals(".txt")))
-	    	{
-	    			String n = fichero.getName() + ".txt";
-	    			fichero = new File("C:\\Users\\migue\\eclipse-workspace\\notepad\\src\\"  + n);
-	    	}
 	        if (fichero.createNewFile()) {
 	          System.out.println("File created: " + fichero.getName());
 	        } else {
@@ -47,9 +45,13 @@ public class Model {
 	      }
 	}
 	
-	public void saveFile() throws IOException {
+	public void saveFile(Window win) throws IOException {
+		if (fichero == null) {
+			String name = JOptionPane.showInputDialog("File name: ");
+			fichero = new File(name);
+		}
 		FileWriter fw = new FileWriter(fichero);
-		fw.write(ta.getText());
+		fw.write(win.getTextPane().getText());
 		fw.close();
 	}
 	

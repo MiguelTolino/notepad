@@ -27,7 +27,7 @@ public class Window extends JFrame {
 		setIcon();
 		setLayout(new BorderLayout());
 		text_pane = new JTextArea();
-		l1 = new JLabel("Column: " + text_pane.getX() + " | Row: " + text_pane.getY() + "   ", JLabel.RIGHT);
+		l1 = new JLabel("Line, " + (text_pane.getX() + 1) + " : Col, " + (text_pane.getY() + 1) + "   ", JLabel.RIGHT);
 		add(l1, BorderLayout.SOUTH);
 		add(text_pane, BorderLayout.CENTER);
 		mu = new MenuController(this);
@@ -55,16 +55,19 @@ public class Window extends JFrame {
 		@Override
 		public void caretUpdate(CaretEvent ev) {
 			// TODO Auto-generated method stub
-			int row = 0;
+			int row = 1, column = 1;
 			JTextArea ta = (JTextArea) ev.getSource();
-			int column = ta.getCaretPosition();
 			try {
-				row = ta.getLineOfOffset(column);
+				 int caretpos = ta.getCaretPosition();
+				    row= ta.getLineOfOffset(caretpos);
+				    column = caretpos - ta.getLineStartOffset(row);
 			} catch (BadLocationException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			l1.setText("Line, " + row + ": Col, " + column + "   ");
+			row += 1;
+			column+=1;
+			l1.setText("Line, " + row + " : Col, " + column + "   ");
 		}
 		
 	}
