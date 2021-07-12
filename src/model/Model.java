@@ -48,6 +48,8 @@ public class Model {
 	public void saveFile(Window win) throws IOException {
 		if (fichero == null) {
 			String name = JOptionPane.showInputDialog("File name: ");
+			if(name == null)
+				return;
 			fichero = new File(name);
 		}
 		FileWriter fw = new FileWriter(fichero);

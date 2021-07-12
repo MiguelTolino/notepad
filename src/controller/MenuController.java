@@ -51,6 +51,9 @@ public class MenuController implements ActionListener {
 			m.newFile(name);
 			System.out.println("New");
 		}
+		if (event.getText().equalsIgnoreCase("Exit")) {
+			System.exit(0);
+		}
 		setFormat(event, size);
 		
 	}

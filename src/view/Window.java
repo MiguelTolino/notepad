@@ -18,6 +18,7 @@ public class Window extends JFrame {
 	private JLabel l1;
 	private Menu mn;
 	private MenuController mu;
+	private PopUpMenu pop;
 
 	public Window() {
 		super("Notepad");
@@ -33,6 +34,8 @@ public class Window extends JFrame {
 		mu = new MenuController(this);
 		mn = new Menu(mu);
 		setJMenuBar(mn);
+		//pop = new PopUpMenu();
+		//text_pane.setComponentPopupMenu(pop);
 		text_pane.addCaretListener(new setRC());
 		setVisible(true);
 	}
