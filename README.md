@@ -32,4 +32,4 @@ We built a simply notepad where we can change text format, it includes several t
 
 ## Preview
 
-![Preview](
+![Preview](/img/preview.png)
